@@ -34,6 +34,7 @@ const userSchema = new Schema(
       type: String,
       default: Roles.Passenger,
     },
+    verified: {type: Boolean, default: false}
   },
   { timestamp: true }
 );

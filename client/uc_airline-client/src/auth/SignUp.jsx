@@ -35,7 +35,7 @@ const SignUp = () => {
             password: data.password
         }
         
-        // const response = await fetch(registerUrl, data)
+        // const response = await fetch(registerUrl, userData)
         // .then((res) =>{
         //    res.json()
         // })
@@ -45,6 +45,7 @@ const SignUp = () => {
         // .catch((error)=>{
         //     console.log('signup error', error)
         // })
+        
 
         const response = await axios.post(registerUrl, userData);
 
