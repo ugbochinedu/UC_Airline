@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {registerUrl} from '../api/Api'
 import axios from "axios";
+import styles from "./signUp1.module.css";
 
 const SignUp = () => {
     const initialValue = {
@@ -34,8 +35,16 @@ const SignUp = () => {
             phoneNumber: data.phoneNumber,
             password: data.password
         }
-        
-        // const response = await fetch(registerUrl, userData)
+
+        const response = await axios.post(registerUrl, userData);
+        console.log(userData)
+        console.log(response);
+
+        if(response.status === 200){
+            console.log('BC res -->', response.data)
+        }
+
+         // const response = await fetch(registerUrl, userData)
         // .then((res) =>{
         //    res.json()
         // })
@@ -46,93 +55,88 @@ const SignUp = () => {
         //     console.log('signup error', error)
         // })
         
-
-        const response = await axios.post(registerUrl, userData);
-
-        if(response.status === 200){
-            console.log('BC res -->', response.data)
-        }
     }
 
-    return (
-      <div>
-        <form action="" onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="">
-              {" "}
-              FirstName:{" "}
-              <input
-                value={data.firstName}
-                name="firstName"
-                onChange={handleChange}
-                type="text"
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="">
-              {" "}
-              LastName:{" "}
-              <input
-                value={data.lastName}
-                name="lastName"
-                onChange={handleChange}
-                type="text"
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="">
-              {" "}
-              email:{" "}
-              <input
-                value={data.email}
-                name="email"
-                onChange={handleChange}
-                type="email"
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="">
-              {" "}
-              UserName:{" "}
-              <input
-                value={data.userName}
-                name="userName"
-                onChange={handleChange}
-                type="text"
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="">
-              {" "}
-              PhoneNumber:{" "}
-              <input
-                value={data.phoneNumber}
-                name="phoneNumber"
-                onChange={handleChange}
-                type="tel"
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="">
-              {" "}
-              Password:{" "}
-              <input
-                value={data.password}
-                name="password"
-                onChange={handleChange}
-                type="pasword"
-              />
-            </label>
-          </div>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    );
+     return (
+       <div className={styles.signup_container}>
+         <div className={styles.signup_form_container}>
+           <div className={styles.left}>
+             <h1>Welcome Back</h1>
+             {/* <Link to="/login"> */}
+             <button type="button" className={styles.white_btn}>
+               Sign in
+             </button>
+             {/* </Link> */}
+           </div>
+           <div className={styles.right}>
+             <form className={styles.form_container} onSubmit={handleSubmit}>
+               <h1>Create Account</h1>
+               <input
+                 className={styles.input}
+                 type="text"
+                 placeholder="First Name"
+                 onChange={handleChange}
+                 name="firstName"
+                 value={data.firstName}
+                 required
+               />
+               <input
+                 className={styles.input}
+                 type="text"
+                 placeholder="Last Name"
+                 onChange={handleChange}
+                 name="lastName"
+                 value={data.lastName}
+                 required
+               />
+               <input
+                 className={styles.input}
+                 type="text"
+                 placeholder="UserName"
+                 onChange={handleChange}
+                 name="userName"
+                 value={data.userName}
+                 required
+               />
+               <input
+                 className={styles.input}
+                 type="email"
+                 placeholder="Email"
+                 onChange={handleChange}
+                 name="email"
+                 value={data.email}
+                 required
+               />
+
+               <input
+                 className={styles.input}
+                 type="number"
+                 placeholder="Phone Number"
+                 onChange={handleChange}
+                 name="phoneNumber"
+                 value={data.phoneNumber}
+                 required
+               />
+               <input
+                 className={styles.input}
+                 type="password"
+                 placeholder="Password"
+                 onChange={handleChange}
+                 name="password"
+                 value={data.password}
+                 required
+               />
+               {/* {error && <div className={styles.error_msg}>{error}</div>} */}
+               <button type="submit" className={styles.green_btn}>
+                 Sign Up
+               </button>
+             </form>
+           </div>
+         </div>
+       </div>
+     );
+
+
 }
 
 export default SignUp
